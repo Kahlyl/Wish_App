@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make A Wish</title>
+</head>
+<body>
+    <div id="header">
+        <h2>Welcome! Sing in to make a wish!</h2>
+    </div>
+    <div id="register">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/register" method="POST">
+        {% csrf_token %}
+        <div id="register_title">
+            <p>Register</p>
+        </div>
+        <p>First Name: <input type="text" name="first_name" id="first_name"></p>
+        <p>Last Name: <input type="text" name="last_name" id="last_name"></p>
+        <p>Email: <input type="text" name="email" id="email"></p>
+        <p>Password: <input type="password" name="password" id="password"></p>
+        <p>Confirm Password: <input type="password" name="confirm_pw" id="confirm_pw"></p>
+        <button type="submit"> Register</button>
+        </form>
+    </div>
+    <div id="login">
+        <div id="login_title">
+            <p>Login</p>
+        </div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/login" method="POST">
+        {% csrf_token %}
+        <p>Email: <input type="text" name="email" id="email"></p>
+        <p>Password: <input type="password" name="password" id="password"></p>
+        <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
